@@ -23,6 +23,10 @@ int main(){
 		return 1;
 	}
 	if (fgets(buffer, sizeof(buffer), fb) != NULL) {
+		len = strlen(buffer);
+		if (len > 0 && buffer[len - 1] == '\n') {
+			buffer[len - 1] = '\0';
+		}
 		if(strcmp(buffer, "FreeBSD") == 0) {
 			char ascia[] = " /\\,-'''''-,/\\  ";
 			char ascib[] = " \\_)	   (_/  ";
