@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define qu fflush(stdout)
 #define GREEN "\x1b[37m"
 #define RESET "\x1b[0m"
+#define MAX 128
 
 int main(){
 	char ascia[] = "     .--.     ";
@@ -12,12 +14,32 @@ int main(){
 	char ascie[] = "  (|     | )  ";
 	char ascif[] = " /'\\_   _/'\\  ";
 	char ascig[] = " \\___)=(___/  ";
+	FILE *fb;
+	char buffer[MAX];
+	int len;
+
+	fb = popen("uname -s", "r");
+	if (fb == NULL){
+		return 1;
+	}
+	if (fgets(buffer, sizeof(buffer), fb) != NULL) {
+		if(strcmp(buffer, "FreeBSD") == 0) {
+			char ascia[] = " /\\,-'''''-,/\\  ";
+			char ascib[] = " \\_)	   (_/  ";
+			char ascic[] = " |	     |  ";
+			char ascid[] = " |	     |  ";
+			char ascie[] = "  ;	    ;   ";
+			char ascif[] = "   '-_____-'    ";
+			char ascig[] = "	        ";
+		}
+	}
+	pclose(fb);
 	printf("%s", ascia);
-	printf(GREEN "OS: " RESET);
+	printf(GREEN "OS:     " RESET);
 	qu;
 	system("cat /etc/os-release | grep PRETTY_NAME | awk -F '=' '{print $2}' | tr -d '\"\'");
 	printf("%s", ascib);
-	printf(GREEN "Host: " RESET);
+	printf(GREEN "Host:   " RESET);
 	qu;
 	system("hostname");
 	printf("%s", ascic);
@@ -25,11 +47,11 @@ int main(){
 	qu;
 	system("uname -sr");
 	printf("%s", ascid);
-	printf(GREEN "Shell: " RESET);
+	printf(GREEN "Shell:  " RESET);
 	qu;
 	system("echo $SHELL");
 	printf("%s", ascie);
-	printf(GREEN "CPU: " RESET);
+	printf(GREEN "CPU:   " RESET);
 	qu;
 	system("grep 'model name' /proc/cpuinfo | uniq | cut -d ':' -f 2");
 	printf("%s", ascif);
@@ -37,9 +59,9 @@ int main(){
 	qu;
 	system("free -m | awk 'NR==2{print $3 \"MiB\" \" / \" $2 \"MiB\"}'");
 	printf("%s", ascig);
-	printf(GREEN "Disk: " RESET);
+	printf(GREEN "Disk:   " RESET);
 	qu;
-	system("df -BG --output=used,size / | awk 'NR==2 {print $1\" / \"$2}'");
+	system("df -h / | awk 'NR==2 {print $2 \" / \" $3}'");
 	printf("\n");
 	return 0;
 }
