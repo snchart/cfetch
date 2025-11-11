@@ -3,7 +3,11 @@
 #include <string.h>
 #define qu fflush(stdout)
 #define GREEN "\x1b[37m"
+//#define BLACK "\x1b[38;2;106;106;106m"
+#define BLACK "\x1b[37m"
+#define RED "\x1b[31m"
 #define RESET "\x1b[0m"
+#define YELLOW "\x1b[33m"
 #define MAX 128
 
 int main(){
@@ -28,13 +32,13 @@ int main(){
 				buffer[len - 1] = '\0';
 			}
 		if(strcmp(buffer, "FreeBSD") == 0) {
-			char ascia[] = " /\\,-'''''-,/\\  ";
-			char ascib[] = " \\_)	   (_/  ";
-			char ascic[] = " |	     |  ";
-			char ascid[] = " |	     |  ";
-			char ascie[] = "  ;	    ;   ";
-			char ascif[] = "   '-_____-'    ";
-			char ascig[] = "	        ";
+			char ascia[] = RED" /\\,-'''''-,/\\  ";
+			char ascib[] = RED" \\_)	   (_/  ";
+			char ascic[] = RED" |	     |  ";
+			char ascid[] = RED" |	     |  ";
+			char ascie[] = RED"  ;	    ;   ";
+			char ascif[] = RED"   '-_____-'    ";
+			char ascig[] = RED"	        ";
 			printf("%s", ascia);
                         printf(GREEN "OS:     " RESET);
                         qu;
@@ -52,7 +56,7 @@ int main(){
                         qu;
                         system("echo $SHELL");
                         printf("%s", ascie);
-                        printf(GREEN "CPU:    " RESET);
+                        printf(GREEN "CPU:   " RESET);
                         qu;
                         system("sysctl -n hw.model");
                         printf("%s", ascif);
@@ -62,18 +66,18 @@ int main(){
                         printf("%s", ascig);
                         printf(GREEN "Disk:   " RESET);
                         qu;
-                        system("df -h / | awk 'NR==2 {print $3 \" / \" $2}'");
+                        system("df -h / | awk 'NR==2 {print $2 \" / \" $3}'");
                         printf("\n");
                         return 0;
 
 		} else if(strcmp(buffer, "Linux") == 0) {
-		        char ascia[] = "     .--.     ";
-	        	char ascib[] = "    |o_o |    ";
-        		char ascic[] = "    |:_/ |    ";
-		        char ascid[] = "   //   \\ \\   ";
-		        char ascie[] = "  (|     | )  ";
-		        char ascif[] = " /'\\_   _/'\\  ";
-		        char ascig[] = " \\___)=(___/  ";
+		        char ascia[] = BLACK"     .--.     ";
+	        	char ascib[] = BLACK"    |" RESET "o" YELLOW "_" RESET "o" BLACK " |    ";
+        		char ascic[] = BLACK"    |" YELLOW":_/" BLACK" |    ";
+		        char ascid[] = BLACK"   /" RESET "/   \\" BLACK " \\   ";
+		        char ascie[] = BLACK"  ("RESET"|     |"BLACK " )  ";
+		        char ascif[] = YELLOW" /'"RESET"\\_   _/"YELLOW"'\\  ";
+		        char ascig[] = YELLOW" \\___)=(___/  ";
 		        printf("%s", ascia);
 		        printf(GREEN "OS:     " RESET);
         		qu;
@@ -101,7 +105,7 @@ int main(){
 		        printf("%s", ascig);
 		        printf(GREEN "Disk:   " RESET);
 		        qu;
-		        system("df -h / | awk 'NR==2 {print $3 \" / \" $2}'");
+		        system("df -h / | awk 'NR==2 {print $2 \" / \" $3}'");
 		        printf("\n");
 			return 0;
 		}
