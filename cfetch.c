@@ -56,7 +56,7 @@ int main(){
                         qu;
                         system("echo $SHELL");
                         printf("%s", ascie);
-                        printf(GREEN "CPU:   " RESET);
+                        printf(GREEN "CPU:    " RESET);
                         qu;
                         system("sysctl -n hw.model");
                         printf("%s", ascif);
