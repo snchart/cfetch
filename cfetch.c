@@ -66,7 +66,7 @@ int main(){
                         printf("%s", ascig);
                         printf(GREEN "Disk:   " RESET);
                         qu;
-                        system("df -h / | awk 'NR==2 {print $2 \" / \" $3}'");
+                        system("df -h / | awk 'NR==2 {print $3 \" / \" $2}'");
                         printf("\n");
                         return 0;
 
@@ -105,7 +105,7 @@ int main(){
 		        printf("%s", ascig);
 		        printf(GREEN "Disk:   " RESET);
 		        qu;
-		        system("df -h / | awk 'NR==2 {print $2 \" / \" $3}'");
+		        system("df -h / | awk 'NR==2 {print $3 \" / \" $2}'");
 		        printf("\n");
 			return 0;
 		}
